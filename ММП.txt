@@ -1,0 +1,79 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+double F(double x)
+{
+	return pow(x, 3) - 6 * pow(x, 2) + 9 * x - 2;
+}
+int main()
+{
+	double x1 = 0, x2 = 0.4, epsx = 0, eps = 1000;
+	setlocale(LC_ALL, "RUS");
+	if (F(x1) * F(x2) < 0)
+	{
+		while (eps > 0.00001)
+		{
+			x1 = (epsx + x2) / 2;
+
+			if (F(x1) * F(epsx) > 0)
+				epsx = x1;
+			/*else if (F(x1) * F(epsx) < 0)
+				epsx = x2;*/
+			else
+				x2 = x1;
+			eps = abs(F(epsx) - F(x2));
+			cout << x1 << "  " << F(x1) << endl;
+		}
+	}
+	else
+		cout << "Нет решений";
+}
+
+
+
+
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+double F(double x)
+{
+	return pow(x, 3) - 6 * pow(x, 2) + 9 * x - 2;
+}
+double F1(double x)
+{
+	return 3 * pow(x, 2) - 12 * x + 9;
+}
+double F2(double x)
+{
+	return 6 * x - 12;
+}
+int main()
+{
+	double x1 = 0, x2 = 0.4, a, b, y = 0, eps = 1000, epsx, c;
+	setlocale(LC_ALL, "RUS");
+	if (F(x1) * F2(x1) >= 0)
+	{
+		a = x1;
+		while (eps > 0.000001)
+		{
+			epsx = x2;
+			x2 = x2 - F(x2) * ((x2 - a) / (F(x2) - F(a)));
+			eps = abs(x2 - epsx);
+			c = x2;
+			cout << "" << c << endl;
+		}
+	}
+	if (F(x2) * F2(x2) >= 0)
+	{
+		b = x2;
+		while (eps > 0.000001)
+		{
+			epsx = x1;
+			x1 = x1 - F(x1) * ((b - x1) / (F(b) - F(x1)));
+			eps = abs(x1 - epsx);
+			c = x1;
+		}
+	}
+	cout << "" << c << endl;
+}//
